@@ -6,7 +6,7 @@ import { Dashboard } from './components/Dashboard';
 import { Subjects } from './components/Subjects';
 import { Pathways } from './components/Pathways';
 import { Planner } from './components/Planner';
-import { Reflection } from './components/Reflection';
+import { EventReflectionView } from './components/Reflection';
 import { Jobs } from './components/Jobs';
 import { Grades } from './components/Grades';
 import './index.css';
@@ -41,7 +41,7 @@ function AppContent() {
       case 'planner':
         return <Planner />;
       case 'reflection':
-        return <Reflection />;
+        return <EventReflectionView />;
       default:
         return <Dashboard onNavigate={setCurrentPage} />;
     }

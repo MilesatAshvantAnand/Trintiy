@@ -1,4 +1,4 @@
-import type { Subject, Pathway } from '../types';
+import type { Subject, Pathway, TYEvent } from '../types';
 
 // Generate unique IDs
 const generateId = () => Math.random().toString(36).substr(2, 9);
@@ -687,6 +687,44 @@ export const getCurrentWeekDates = (): string[] => {
 };
 
 // Generate initial scheduled tasks based on user preferences
+export const seedEvents: TYEvent[] = [
+    {
+        id: 'evt_girls_stem',
+        name: 'TY Girls in STEM Workshop',
+        date: '2023-11-15',
+        description: 'A full-day interactive workshop exploring coding, robotics, and careers in engineering.',
+        type: 'Workshop',
+    },
+    {
+        id: 'evt_ploughing',
+        name: 'National Ploughing Championships',
+        date: '2023-09-20',
+        description: 'Annual outdoor agricultural show, focusing on agribusiness, sustainability, and technological innovation in farming.',
+        type: 'Trip',
+    },
+    {
+        id: 'evt_first_aid',
+        name: 'First Aid Course',
+        date: '2023-10-05',
+        description: 'Comprehensive first aid training including CPR, treating burns, and emergency response.',
+        type: 'Workshop',
+    },
+    {
+        id: 'evt_driver_ed',
+        name: 'Driver Education Module',
+        date: '2024-02-12',
+        description: 'Introduction to road safety, driving theory, and basic car maintenance.',
+        type: 'Workshop',
+    },
+    {
+        id: 'evt_lawyer',
+        name: 'Guest Speaker: Career in Law',
+        date: '2023-10-25',
+        description: 'Talk by a local solicitor about studying law, passing the bar, and daily life in a legal firm.',
+        type: 'Talk',
+    },
+];
+
 export const generateInitialTasks = (
     selectedSubjects: string[],
     _selectedPathways: string[],

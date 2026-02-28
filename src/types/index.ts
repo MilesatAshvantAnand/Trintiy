@@ -120,12 +120,19 @@ export interface ScheduledTask {
   completed: boolean;
 }
 
-export interface Reflection {
+export interface TYEvent {
   id: string;
-  weekStart: string;
-  revisedTopics: string;
-  pathwayLearnings: string;
-  preparednessScore: number;
+  name: string;
+  date: string;
+  description: string;
+  type: 'Workshop' | 'Trip' | 'Talk' | 'Other';
+}
+
+export interface EventReflection {
+  id: string;
+  eventId: string;
+  takeaways: string;
+  rating: number; // 1-5
   createdAt: string;
 }
 
@@ -143,7 +150,7 @@ export interface AppState {
   subjects: Subject[];
   pathways: Pathway[];
   scheduledTasks: ScheduledTask[];
-  reflections: Reflection[];
+  eventReflections: EventReflection[];
   juniorCycleGrades: JuniorCycleGrade[];
   guidanceQuestions: GuidanceQuestion[];
   quizAttempts: QuizAttempt[];
@@ -162,7 +169,7 @@ export type AppAction =
   | { type: 'SCHEDULE_TASK'; payload: ScheduledTask }
   | { type: 'RESCHEDULE_TASK'; payload: { taskId: string; newDate: string } }
   | { type: 'TOGGLE_SCHEDULED_TASK'; payload: string }
-  | { type: 'ADD_REFLECTION'; payload: Reflection }
+  | { type: 'ADD_EVENT_REFLECTION'; payload: EventReflection }
   | { type: 'SET_JUNIOR_GRADES'; payload: JuniorCycleGrade[] }
   | { type: 'ADD_GUIDANCE_QUESTION'; payload: GuidanceQuestion }
   | { type: 'ANSWER_GUIDANCE_QUESTION'; payload: { questionId: string; answer: string } }

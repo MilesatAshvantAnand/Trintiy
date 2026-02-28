@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect, type ReactNode } from 'react';
-import type { AppState, AppAction } from '../types';
-import { seedSubjects, seedPathways } from '../data/seedData';
+import type { AppState, AppAction, TYEvent } from '../types';
+import { seedSubjects, seedPathways, seedEvents } from '../data/seedData';
 
 const STORAGE_KEY = 'ty-study-app-data';
 
@@ -9,7 +9,7 @@ const initialState: AppState = {
     subjects: seedSubjects,
     pathways: seedPathways,
     scheduledTasks: [],
-    reflections: [],
+    eventReflections: [],
     juniorCycleGrades: [],
     guidanceQuestions: [],
     quizAttempts: [],
@@ -134,10 +134,10 @@ function appReducer(state: AppState, action: AppAction): AppState {
                 ),
             };
 
-        case 'ADD_REFLECTION':
+        case 'ADD_EVENT_REFLECTION':
             return {
                 ...state,
-                reflections: [...state.reflections, action.payload],
+                eventReflections: [...state.eventReflections, action.payload],
             };
 
         case 'SET_JUNIOR_GRADES':
@@ -183,6 +183,7 @@ interface AppContextValue {
     getUserPathways: () => typeof seedPathways;
     getTopicsNeedingRevision: () => { subject: string; topic: string; subjectId: string; topicId: string }[];
     getWeeklyProgress: () => { topicsRevised: number; tasksCompleted: number };
+    getAvailableEvents: () => TYEvent[];
 }
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
@@ -254,6 +255,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         return { topicsRevised, tasksCompleted };
     };
 
+    const getAvailableEvents = () => seedEvents;
+
     return (
         <AppContext.Provider
             value={{
@@ -263,6 +266,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
                 getUserPathways,
                 getTopicsNeedingRevision,
                 getWeeklyProgress,
+                getAvailableEvents,
             }}
         >
             {children}
