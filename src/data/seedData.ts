@@ -247,6 +247,12 @@ export const seedPathways: Pathway[] = [
             },
             {
                 id: generateId(),
+                title: 'Research: Patch Accelerator',
+                description: 'Check out joinpatch.org, a summer accelerator for ambitious teens in Ireland',
+                completed: false,
+            },
+            {
+                id: generateId(),
                 title: 'Research: Software Developer Career',
                 description: 'Find 3 facts about what a software developer does daily',
                 completed: false,
@@ -723,6 +729,13 @@ export const seedEvents: TYEvent[] = [
         description: 'Talk by a local solicitor about studying law, passing the bar, and daily life in a legal firm.',
         type: 'Talk',
     },
+    {
+        id: 'evt_patch',
+        name: 'Patch Accelerator Info Session',
+        date: '2024-11-20',
+        description: 'An online presentation on what it takes to join the Patch summer accelerator for extraordinary teens.',
+        type: 'Talk',
+    }
 ];
 
 export const generateInitialTasks = (

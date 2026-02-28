@@ -357,6 +357,12 @@ export function Pathways() {
                                     <ExternalLink style={{ width: 14, height: 14 }} />
                                     CAO Applications
                                 </a>
+                                {pathway.id === 'stem' && (
+                                    <a href="https://www.joinpatch.org" target="_blank" rel="noopener noreferrer" className="resource-link">
+                                        <ExternalLink style={{ width: 14, height: 14 }} />
+                                        Patch Accelerator
+                                    </a>
+                                )}
                             </div>
                         </div>
                     )}

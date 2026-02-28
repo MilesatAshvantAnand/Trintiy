@@ -58,8 +58,24 @@ export function Dashboard({ onNavigate }: DashboardProps) {
                 <p className="page-subtitle">Here's your study overview for this week</p>
             </header>
 
+            {/* Opportunity Alert */}
+            <section className="section" style={{ paddingBottom: 0 }}>
+                <div className="card-flat" style={{ background: 'var(--gradient-primary)', color: 'white', display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+                    <div className="flex justify-between items-start">
+                        <div>
+                            <span className="badge" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', marginBottom: '8px', border: 'none' }}>Opportunity Alert 🚀</span>
+                            <h2 style={{ fontSize: '1.25rem', margin: '0 0 4px 0', fontWeight: 600 }}>Patch Accelerator Applications Open!</h2>
+                            <p style={{ margin: 0, opacity: 0.9, fontSize: '0.95rem' }}>Are you an ambitious teen interested in STEM, engineering, or startups? Patch is a summer accelerator for extraordinary teens in Ireland.</p>
+                        </div>
+                    </div>
+                    <a href="https://www.joinpatch.org" target="_blank" rel="noopener noreferrer" className="btn btn-sm" style={{ alignSelf: 'flex-start', background: 'white', color: 'var(--primary)', fontWeight: 600, border: 'none', padding: '8px 16px' }}>
+                        Learn More <ChevronRight style={{ width: 16, height: 16 }} />
+                    </a>
+                </div>
+            </section>
+
             {/* Stats Grid */}
-            <div className="grid-2 section">
+            <div className="grid-2 section" style={{ paddingTop: '1.5rem' }}>
                 <div className="stat-card">
                     <div className="stat-value">{topicsRevised}</div>
                     <div className="stat-label">Topics Confident</div>

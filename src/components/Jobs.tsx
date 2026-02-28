@@ -12,6 +12,7 @@ import {
     Clock,
     CheckSquare,
     ExternalLink,
+    Cpu,
 } from 'lucide-react';
 
 export function Jobs() {
@@ -76,6 +77,13 @@ export function Jobs() {
                             <h3 style={{ margin: 0 }}>Summer Jobs</h3>
                         </div>
                         <p className="task-desc">Camps, tourism spots, or extra retail help. Start looking in Spring!</p>
+                    </div>
+                    <div className="card-flat">
+                        <div className="flex" style={{ alignItems: 'center', gap: 'var(--space-sm)', marginBottom: 'var(--space-sm)' }}>
+                            <Cpu style={{ color: '#3b82f6' }} />
+                            <h3 style={{ margin: 0 }}>Accelerators & Tech</h3>
+                        </div>
+                        <p className="task-desc">Programs like <a href="https://www.joinpatch.org" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', fontWeight: 600 }}>Patch</a> offer excellent experience.</p>
                     </div>
                 </div>
             </section>
