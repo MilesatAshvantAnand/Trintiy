@@ -40,7 +40,7 @@ export function Layout({ children, currentPage, onNavigate }: LayoutProps) {
                 <aside className="sidebar">
                     <div className="sidebar-logo">
                         <GraduationCap />
-                        <span>TY Study</span>
+                        <span>TY Tutor</span>
                     </div>
                     <nav className="sidebar-nav">
                         <ul className="sidebar-nav-list">

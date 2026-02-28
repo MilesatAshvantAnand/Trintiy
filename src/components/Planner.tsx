@@ -140,15 +140,15 @@ export function Planner() {
                     <button
                         className="btn btn-sm btn-secondary"
                         onClick={() => {
-                            const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//TY Study App//EN\n${allTasks.map(t => {
+                            const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//TY Tutor App//EN\n${allTasks.map(t => {
                                 const d = t.date.replace(/-/g, '');
-                                return `BEGIN:VEVENT\nDTSTART:${d}T160000\nDTEND:${d}T170000\nSUMMARY:${t.title}\nDESCRIPTION:${'subject' in t ? t.subject : t.pathway} - TY Study App\nEND:VEVENT`;
+                                return `BEGIN:VEVENT\nDTSTART:${d}T160000\nDTEND:${d}T170000\nSUMMARY:${t.title}\nDESCRIPTION:${'subject' in t ? t.subject : t.pathway} - TY Tutor App\nEND:VEVENT`;
                             }).join('\n')}\nEND:VCALENDAR`;
                             const blob = new Blob([icsContent], { type: 'text/calendar' });
                             const url = URL.createObjectURL(blob);
                             const a = document.createElement('a');
                             a.href = url;
-                            a.download = 'ty-study-planner.ics';
+                            a.download = 'ty-tutor-planner.ics';
                             a.click();
                             URL.revokeObjectURL(url);
                         }}

@@ -1,13 +1,13 @@
-
+import { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import {
     BookOpen,
     Compass,
     CheckCircle2,
-    AlertCircle,
     TrendingUp,
     Calendar,
     ChevronRight,
+    Check,
 } from 'lucide-react';
 
 interface DashboardProps {
@@ -15,14 +15,16 @@ interface DashboardProps {
 }
 
 export function Dashboard({ onNavigate }: DashboardProps) {
-    const { state, getUserPathways, getTopicsNeedingRevision, getWeeklyProgress } = useApp();
+    const { state, dispatch, getUserPathways, getTopicsNeedingRevision, getWeeklyProgress } = useApp();
     const user = state.user;
 
     if (!user) return null;
 
 
     const userPathways = getUserPathways();
-    const topicsNeedingRevision = getTopicsNeedingRevision();
+    // Cache the topics that need revision when Dashboard mounts so they don't disappear immediately
+    const [displayTopics] = useState(() => getTopicsNeedingRevision().slice(0, 5));
+    const [completedTopics, setCompletedTopics] = useState<Set<string>>(new Set());
     const { topicsRevised } = getWeeklyProgress();
 
     // Get current time greeting
@@ -35,6 +37,18 @@ export function Dashboard({ onNavigate }: DashboardProps) {
         (acc, p) => acc + p.tasks.filter((t) => t.completed).length,
         0
     );
+
+    const handleMarkConfident = (subjectId: string, topicId: string) => {
+        dispatch({
+            type: 'UPDATE_TOPIC_STATUS',
+            payload: { subjectId, topicId, status: 'confident' }
+        });
+        setCompletedTopics(prev => {
+            const next = new Set(prev);
+            next.add(topicId);
+            return next;
+        });
+    };
 
     return (
         <div className="dashboard animate-fade-in">
@@ -68,20 +82,30 @@ export function Dashboard({ onNavigate }: DashboardProps) {
                     </button>
                 </div>
 
-                {topicsNeedingRevision.length > 0 ? (
+                {displayTopics.length > 0 ? (
                     <div className="card-flat">
-                        {topicsNeedingRevision.slice(0, 5).map((item, index) => (
-                            <div key={index} className="task-item" style={{ borderBottom: index < 4 ? '1px solid var(--bg-tertiary)' : 'none' }}>
-                                <div className="task-checkbox">
-                                    <AlertCircle />
+                        {displayTopics.map((item, index) => {
+                            const isCompleted = completedTopics.has(item.topicId);
+                            return (
+                                <div key={item.topicId} className={`task-item ${isCompleted ? 'completed' : ''}`} style={{ borderBottom: index < displayTopics.length - 1 ? '1px solid var(--bg-tertiary)' : 'none' }}>
+                                    <div
+                                        className={`task-checkbox ${isCompleted ? 'checked' : ''}`}
+                                        onClick={() => !isCompleted && handleMarkConfident(item.subjectId, item.topicId)}
+                                        title={isCompleted ? "Completed" : "Mark as confident"}
+                                        style={{ cursor: isCompleted ? 'default' : 'pointer' }}
+                                    >
+                                        <Check />
+                                    </div>
+                                    <div className="task-content">
+                                        <div className="task-title">{item.topic}</div>
+                                        <div className="task-desc">{item.subject}</div>
+                                    </div>
+                                    <span className={`badge ${isCompleted ? 'badge-confident' : 'badge-need-revise'}`}>
+                                        {isCompleted ? 'Confident' : 'Needs revision'}
+                                    </span>
                                 </div>
-                                <div className="task-content">
-                                    <div className="task-title">{item.topic}</div>
-                                    <div className="task-desc">{item.subject}</div>
-                                </div>
-                                <span className="badge badge-need-revise">Needs revision</span>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 ) : (
                     <div className="card-flat empty-state">

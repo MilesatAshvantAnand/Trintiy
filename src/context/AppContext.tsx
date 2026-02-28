@@ -181,7 +181,7 @@ interface AppContextValue {
     // Helper functions
     getUserSubjects: () => typeof seedSubjects;
     getUserPathways: () => typeof seedPathways;
-    getTopicsNeedingRevision: () => { subject: string; topic: string; subjectId: string }[];
+    getTopicsNeedingRevision: () => { subject: string; topic: string; subjectId: string; topicId: string }[];
     getWeeklyProgress: () => { topicsRevised: number; tasksCompleted: number };
 }
 
@@ -222,7 +222,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
 
     const getTopicsNeedingRevision = () => {
-        const result: { subject: string; topic: string; subjectId: string }[] = [];
+        const result: { subject: string; topic: string; subjectId: string; topicId: string }[] = [];
         getUserSubjects().forEach((subject) => {
             subject.topics
                 .filter((t) => t.status === 'need-to-revise')
@@ -231,6 +231,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
                         subject: subject.name,
                         topic: topic.name,
                         subjectId: subject.id,
+                        topicId: topic.id,
                     });
                 });
         });

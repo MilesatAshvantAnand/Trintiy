@@ -1,4 +1,4 @@
-// Types for TY Study & Pathway App
+// Types for TY Tutor & Pathway App
 
 export type TopicStatus = 'need-to-revise' | 'in-progress' | 'confident';
 export type RevisionFrequency = 'light' | 'medium' | 'strong';

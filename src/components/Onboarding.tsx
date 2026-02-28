@@ -119,7 +119,7 @@ export function Onboarding({ onComplete }: OnboardingProps) {
                         <div className="onboarding-icon">
                             <GraduationCap />
                         </div>
-                        <h1 className="onboarding-title">Welcome to TY Study!</h1>
+                        <h1 className="onboarding-title">Welcome to TY Tutor!</h1>
                         <p className="onboarding-desc">
                             Stay on top of your revision and explore exciting career pathways during Transition Year.
                         </p>
